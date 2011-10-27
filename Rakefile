@@ -14,7 +14,7 @@ task(:install => :build)   { gem :install, gem_file                      }
 task(:publish => :install) { gem :push, gem_file                         }
 task(:commit)              { git :commit, '--allow-empty', '-m', message }
 task(:tag)                 { git :tag, '-s', '-m', message, version      }
-task(:push)                { git :push                                   }
+task(:push_commits)        { git(:push) and git(:push, '--tags')         }
 
 task :release => [:spec, :commit, :publish, :tag, :push]
 task :default => :spec
