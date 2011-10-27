@@ -18,7 +18,9 @@ describe Tool::Lock do
   end
 
   it 'locks for other threads' do
-    a = Thread.new { synchronize { sleep(0.1) and track << :first } }
+    a = Thread.new { synchronize { sleep(0.2) and track << :first } }
+
+    sleep 0.1
     b = Thread.new { synchronize { track << :second } }
 
     a.join
