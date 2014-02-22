@@ -1,6 +1,8 @@
 module Tool
   # A simple wrapper around ObjectSpace::WeakMap that allows matching keys by equality rather than identity.
-  # Used for caching.
+  # Used for caching. Note that `fetch` is not guaranteed to return the object, even if it has not been
+  # garbage collected yet, especially when used concurrently. Therefore, the block passed to `fetch` has to
+  # be idempotent.
   #
   # @example
   #   class ExpensiveComputation
@@ -21,7 +23,7 @@ module Tool
     end
 
     # @param [Array<#hash>] key for caching
-    # @yield block that will be called to populate entry if missing
+    # @yield block that will be called to populate entry if missing (has to be idempotent)
     # @return value stored in map or result of block
     def fetch(*key)
       identity = @keys[key.hash]

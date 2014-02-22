@@ -29,6 +29,8 @@ module Tool
   #   end
   module Decoration
     module Initializer
+      # Make sure decorations list is initializsed upon instantiation.
+      # @!visibility private
       def initialize(*)
         setup_decorations
         super
@@ -36,21 +38,32 @@ module Tool
     end
 
     module Setup
+      # Make sure decorations list is initializsed if Decoration is included.
+      # @!visibility private
       def included(object)
-        super
         case object
         when Class  then object.send(:include, Initializer)
         when Module then object.extend(Setup)
         end
+        super
       end
 
+      # Make sure decorations list is initializsed if Decoration extends an object.
+      # @!visibility private
       def extended(object)
         object.send(:setup_decorations)
+        super
       end
     end
 
     extend Setup
 
+    # Set up a decoration.
+    #
+    # @param [Proc, UnboundMethod, nil] block used for defining a method right away
+    # @param [String, Symbol] name given to the generated method if block is given
+    # @yield callback called with method name once method is defined
+    # @yieldparam [Symbol] method name of the method that is to be decorated
     def decorate(block = nil, name: "generated", &callback)
       @decorations << callback
 
@@ -64,6 +77,10 @@ module Tool
       end
     end
 
+    # Runs a given block without applying decorations defined outside of the block.
+    # Decorations defined before the block will still be registered after the block.
+    #
+    # @yield block to run without decorations
     def without_decorations
       @decorations.clear if was = @decorations.to_a.dup
       yield
