@@ -31,9 +31,7 @@ end
 ## Tool::EqualityMap
 
 Weak reference caching based on key equality.
-Used for caching. Note that `fetch` is not guaranteed to return the object, even if it has not been
-garbage collected yet, especially when used concurrently. Therefore, the block passed to `fetch` has to
-be idempotent
+Used for caching.
 
 ``` ruby
 class ExpensiveComputation
@@ -44,6 +42,10 @@ class ExpensiveComputation
   end
 end
 ```
+
+Note that `fetch` is not guaranteed to return the object, even if it has not been
+garbage collected yet, especially when used concurrently. Therefore, the block passed to `fetch` has to
+be idempotent.
 
 ## Tool::ThreadLocal
 
