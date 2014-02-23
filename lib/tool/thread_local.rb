@@ -55,7 +55,7 @@ module Tool
     # @see #initialize
     # @!visibility private
     def self.new(*)
-      result = super(default)
+      result = super
       @mutex.synchronize { @locals << WeakRef.new(result) }
       result
     end
