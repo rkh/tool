@@ -6,10 +6,10 @@ module Tool
   # Have thread local values without them actually being thread global.
   #
   # Advantages:
-  # * values for all threads are garbage collected when ThreadLocal instance is
-  # * values for specific thread are garbage collected when thread is
-  # * no hidden global state
-  # * supports other data types besides hashes.
+  # * Values for all threads are garbage collected when ThreadLocal instance is.
+  # * Values for specific thread are garbage collected when thread is.
+  # * No hidden global state.
+  # * Supports other data types besides hashes.
   #
   # @example To replace Thread.current hash access
   #   local = Tool::ThreadLocal.new
