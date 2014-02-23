@@ -1,6 +1,6 @@
 *Make sure you view the correct docs: [latest release](http://rubydoc.info/gems/tool/frames), [master](http://rubydoc.info/github/rkh/tool/master/frames).*
 
-General purpose Ruby library used by Sinatra 2.0, Mustermann and related projects.
+Welcome to [Tool](http://www.youtube.com/watch?v=mYKLvYGqaC0), the general purpose Ruby library used by Sinatra 2.0, Mustermann and related projects.
 
 ## Tool::Decoration
 
