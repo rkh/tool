@@ -2,6 +2,8 @@ require 'tool/thread_local'
 
 describe Tool::ThreadLocal do
   describe :__getobj__ do
+    subject { Tool::ThreadLocal.new }
+
     specify 'normal access' do
       subject[:foo] = 'bar'
       expect(subject[:foo]).to be == 'bar'
@@ -41,6 +43,8 @@ describe Tool::ThreadLocal do
   end
 
   describe :__size__ do
+    subject { Tool::ThreadLocal.new }
+
     specify 'with one thread' do
       subject[:a] = 'A'
       expect(subject.__size__).to be == 1
@@ -55,6 +59,7 @@ describe Tool::ThreadLocal do
     end
 
     specify 'with dead threads' do
+      next if defined? RUBY_ENGINE and RUBY_ENGINE == 'rbx'
       subject[:a] = 'A'
 
       Thread.new do

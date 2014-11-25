@@ -17,6 +17,10 @@ module Tool
   class EqualityMap
     attr_reader :map
 
+    def self.new
+      defined?(ObjectSpace::WeakMap) ? super : {}
+    end
+
     def initialize
       @keys = {}
       @map  = ObjectSpace::WeakMap.new
