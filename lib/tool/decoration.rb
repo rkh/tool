@@ -69,7 +69,7 @@ module Tool
 
       if block
         alias_name = "__" << name.to_s.downcase.gsub(/[^a-z]+/, ?_) << ?1
-        alias_name = alias_name.succ while respond_to? alias_name, true
+        alias_name = alias_name.succ while private_method_defined? alias_name or method_defined? alias_name
         without_decorations { define_method(name, &block) }
         alias_method(alias_name, name)
         remove_method(name)

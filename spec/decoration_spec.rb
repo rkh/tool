@@ -33,6 +33,13 @@ describe Tool::Decoration do
       subject.send(:define_method, :bar) { }
       expect(calls).to be == [:a]
     end
+
+    specify "generated names" do
+      names = []
+      subject.decorate(-> { 23 }) { |m| names << m }
+      subject.decorate(-> { 42 }) { |m| names << m }
+      expect(names.map { |m| subject.new.send(m) }).to be == [23, 42]
+    end
   end
 
   context "extending a class" do
