@@ -14,7 +14,7 @@ module Tool
 
     # @!visibility private
     def write(line)
-      super if line !~ /^\S+gems\/ruby\-\S+:\d+: warning:/
+      super if line !~ /^\S+gems?\/ruby\S+:\d+: warning:/
     end
   end
 end
