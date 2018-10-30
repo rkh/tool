@@ -2,7 +2,7 @@ require 'delegate'
 
 module Tool
   # Enables Ruby's built-in warnings (-w) but filters out those caused by third-party gems.
-  # Does not invlove any manual set up.
+  # Does not involve any manual set up.
   #
   # @example
   #   require 'tool/warning_filter'
